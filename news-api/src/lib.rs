@@ -1,8 +1,18 @@
-// functions defined in lib.rs are importable without mentioning the file name -- news_api::fetch_news instead of news_api::lib::fetch_news
-pub mod models;
+// functions defined in lib.rs are importable without mentioning the file name
+// -- news_api::fetch_news instead of news_api::lib::fetch_news
 
-use std::error::Error;
-use models::Articles;
+use serde::Deserialize;
+
+#[derive(Deserialize, Debug)]
+pub struct Articles {
+    pub articles: Vec<Article>,
+}
+
+#[derive(Deserialize, Debug)]
+pub struct Article {
+    pub title: String,
+    pub url: String,
+}
 
 #[derive(thiserror::Error, Debug)]
 pub enum NewsApiError {
